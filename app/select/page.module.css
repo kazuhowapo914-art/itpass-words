@@ -1,0 +1,156 @@
+.main {
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.topRow {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.softBtn {
+  background: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+
+.softLink {
+  margin-left: auto;
+  text-decoration: none;
+  color: var(--color-text);
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-soft);
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-lg);
+}
+
+.sectionTitle {
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.majorCard {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.majorRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 800;
+}
+
+.majorLabel {
+  font-size: 14px;
+}
+
+.minorList {
+  margin-top: var(--space-md);
+  display: grid;
+  gap: 8px;
+  padding-left: 6px;
+}
+
+.minorRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.minorLabel {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.hint {
+  margin-top: var(--space-md);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.levelRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.levelPill {
+  border: none;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+
+.levelPillOn {
+  outline: 2px solid var(--color-primary);
+}
+
+.twoCols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+
+.subTitle {
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+}
+
+.radioRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-md);
+  background: rgba(255, 243, 247, 0.9);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.startBtn {
+  width: min(520px, calc(100% - 24px));
+  margin: 0 auto;
+  display: block;
+
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.bottomSpacer {
+  height: 80px; /* fixed bar分の余白 */
+}

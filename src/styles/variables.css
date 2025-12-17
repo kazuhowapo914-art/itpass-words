@@ -1,0 +1,19 @@
+:root {
+  /*  ベースカラー（後でいくらでも調整OK） */
+  --bg-main: #fff3f7;        /* うっすらピンク */
+  --bg-card: #ffffff;
+  --color-primary: #ff8fab;  /* 濃いピンク */
+  --color-success: #b7e4c7;  /* 黄緑 */
+  --color-warning: #ffd6a5;  /* 薄オレンジ */
+  --color-danger: #ffadad;   /* 赤系 */
+  --color-text: #333;
+
+  /*  UIルール */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+}

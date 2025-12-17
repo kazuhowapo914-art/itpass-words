@@ -1,0 +1,368 @@
+/* app/study/page.module.css */
+
+.main {
+  padding: 18px;
+  padding-bottom: 140px; /* 下部固定バーの分 */
+  display: grid;
+  place-items: start center;
+  min-height: calc(100svh - 56px); /* Header想定 */
+  background: var(--bg, #fff);
+}
+
+.loading {
+  opacity: 0.75;
+  padding: 24px;
+}
+
+.toast {
+  position: fixed;
+  top: 72px; /* Headerの下 */
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  z-index: 30;
+
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-soft, 0 10px 30px rgba(0, 0, 0, 0.08));
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(20, 20, 20, 0.92);
+}
+
+.toastShow {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.card {
+  width: min(760px, 100%);
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-soft, 0 12px 40px rgba(0, 0, 0, 0.08));
+  padding: 18px;
+  display: grid;
+  gap: 14px;
+
+  transition: transform 180ms ease, opacity 180ms ease;
+  will-change: transform, opacity;
+}
+
+/* うっすらトーン（定着度でカードの雰囲気変える） */
+.tone_neutral {
+  background: rgba(255, 255, 255, 0.82);
+}
+.tone_bad {
+  background: rgba(255, 235, 238, 0.72);
+}
+.tone_mid {
+  background: rgba(255, 248, 225, 0.72);
+}
+.tone_good {
+  background: rgba(232, 245, 233, 0.72);
+}
+.tone_perfect {
+  background: rgba(225, 245, 254, 0.72);
+}
+
+/* 押下→次へ を視覚で伝える */
+.slideNext {
+  transform: translateX(10px);
+  opacity: 0.6;
+}
+.slidePrev {
+  transform: translateX(-10px);
+  opacity: 0.6;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.category {
+  font-size: 12px;
+  opacity: 0.78;
+  font-weight: 800;
+}
+
+.levelPill {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pill_neutral {
+  background: rgba(255, 255, 255, 0.75);
+}
+.pill_bad {
+  background: rgba(229, 57, 53, 0.12);
+}
+.pill_mid {
+  background: rgba(251, 140, 0, 0.12);
+}
+.pill_good {
+  background: rgba(67, 160, 71, 0.12);
+}
+.pill_perfect {
+  background: rgba(2, 136, 209, 0.12);
+}
+
+.term {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 0.3px;
+  font-weight: 950;
+}
+
+.meaningBox {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 12px 14px;
+}
+
+.meaningHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.meaningTitle {
+  font-weight: 950;
+  font-size: 12px;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+.meaning {
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+.meaningHidden {
+  opacity: 0.62;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.btnTiny {
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.btnTiny:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.details summary {
+  cursor: pointer;
+  font-weight: 950;
+}
+.detail {
+  margin-top: 8px;
+  line-height: 1.75;
+  opacity: 0.95;
+  font-size: 14px;
+}
+
+/* 下部固定バー（評価が主役） */
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.bottomTopRow {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.hintText {
+  font-size: 12px;
+  opacity: 0.72;
+  font-weight: 800;
+}
+
+.actions {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.navRow {
+  width: min(760px, 100%);
+  margin: 10px auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnBase {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 14px;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft, 0 10px 30px rgba(0, 0, 0, 0.08));
+  transition: transform 80ms ease, filter 120ms ease, opacity 120ms ease;
+}
+
+.btnBase:active {
+  transform: translateY(1px);
+}
+
+.btnBase:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btnBad {
+  composes: btnBase;
+  color: white;
+  background: rgba(236, 64, 122, 0.95);
+}
+
+.btnMid {
+  composes: btnBase;
+  color: rgba(30, 30, 30, 0.92);
+  background: rgba(255, 213, 79, 0.95);
+}
+
+.btnGood {
+  composes: btnBase;
+  color: white;
+  background: rgba(67, 160, 71, 0.95);
+}
+
+.btnSkip {
+  composes: btnBase;
+  color: rgba(30, 30, 30, 0.90);
+  background: rgba(245, 245, 245, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+.btnBack {
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.btnBack:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+/* 空状態 */
+.emptyTitle {
+  font-weight: 950;
+  font-size: 18px;
+}
+.emptyHint {
+  opacity: 0.75;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.emptyActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.betweenTitle {
+  font-weight: 950;
+  font-size: 18px;
+}
+
+.betweenHint {
+  opacity: 0.78;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.betweenActions {
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.betweenSub {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.btnPrimary {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 14px;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft, 0 10px 30px rgba(0, 0, 0, 0.08));
+  color: white;
+  background: rgba(2, 136, 209, 0.95);
+}
+
+.detail {
+  white-space: pre-wrap;
+}
+
+.meaning {
+  white-space: pre-wrap;
+}
+
+
+
+/* スマホ対応 */
+@media (max-width: 520px) {
+  .actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .term {
+    font-size: 26px;
+  }
+}

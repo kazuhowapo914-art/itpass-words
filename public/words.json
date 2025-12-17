@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "term": "OS（オペレーティングシステム）",
+    "meaning": "コンピュータ全体を管理し、アプリとハードウェアの仲介を行う基本ソフトウェア",
+    "detail": "・人でいうと「司令塔」みたいな存在\n・アプリが直接CPUやメモリを触らないように調整する\n・例：Windows、macOS、Linux、Android、iOS\n・試験ポイント：基本ソフトウェア＝OS",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["OS", "基本ソフト"]
+  },
+  {
+    "id": 2,
+    "term": "ミドルウェア",
+    "meaning": "OSとアプリケーションの中間で共通機能を提供するソフトウェア",
+    "detail": "・アプリ開発を楽にするための部品集\n・例：データベース管理システム、Webサーバ\n・日常例：電子レンジの「自動温め」機能みたいな便利機能\n・試験ポイント：OSとアプリの間",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["ミドルウェア"]
+  },
+  {
+    "id": 3,
+    "term": "アプリケーションソフトウェア",
+    "meaning": "利用者が特定の目的で使用するソフトウェア",
+    "detail": "・ユーザーが直接使うソフト\n・例：Word、Excel、ブラウザ、ゲーム\n・基本ソフト(OS)とセットで使われる\n・試験ポイント：業務用・一般用どちらも含む",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["アプリ"]
+  },
+  {
+    "id": 4,
+    "term": "オープンソースソフトウェア（OSS）",
+    "meaning": "ソースコードが公開され、誰でも利用や改変が可能なソフトウェア",
+    "detail": "・無料で使えることが多い\n・世界中の人が改良に参加\n・例：Linux、Apache\n・試験ポイント：必ずしも無料とは限らない",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["OSS"]
+  },
+  {
+    "id": 5,
+    "term": "パッケージソフトウェア",
+    "meaning": "多くの利用者向けに開発・販売される汎用ソフトウェア",
+    "detail": "・完成品として売られているソフト\n・例：会計ソフト、年賀状ソフト\n・日常例：既製服（オーダーメイドの反対）\n・試験ポイント：カスタマイズ性は低め",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["パッケージ"]
+  },
+  {
+    "id": 6,
+    "term": "カスタマイズ",
+    "meaning": "既存のソフトウェアを利用者の要望に合わせて変更すること",
+    "detail": "・パッケージソフトを少し改造\n・例：画面項目を追加する\n・フルスクラッチより安く済む\n・試験ポイント：完全新規開発ではない",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["開発"]
+  },
+  {
+    "id": 7,
+    "term": "API",
+    "meaning": "ソフトウェア同士が機能を呼び出すための仕組み",
+    "detail": "・アプリ同士の「窓口」\n・例：地図アプリが地図情報を取得\n・日常例：レストランの注文口\n・試験ポイント：機能連携を実現",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["API", "連携"]
+  },
+  {
+    "id": 8,
+    "term": "クラウドサービス",
+    "meaning": "インターネット経由で提供されるソフトウェアや機能",
+    "detail": "・インストール不要で使える\n・例：Google Drive、Dropbox\n・日常例：借り物の作業スペース\n・試験ポイント：場所を選ばず利用可能",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["クラウド"]
+  },
+  {
+    "id": 9,
+    "term": "バージョン管理",
+    "meaning": "ソフトウェアの変更履歴を管理する仕組み",
+    "detail": "・変更前に戻せる\n・複数人での開発に必須\n・例：Git\n・試験ポイント：履歴管理と共同作業",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["開発管理"]
+  },
+  {
+    "id": 10,
+    "term": "ソフトウェアライセンス",
+    "meaning": "ソフトウェアの利用条件を定めた契約",
+    "detail": "・使い方のルールブック\n・商用利用NGなどの制限あり\n・OSSにもライセンスはある\n・試験ポイント：無断利用はNG",
+    "categoryId": "TECHNOLOGY.SOFTWARE",
+    "tags": ["ライセンス"]
+  }
+  
+]

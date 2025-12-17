@@ -1,0 +1,9 @@
+@import "../styles/variables.css";
+
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
