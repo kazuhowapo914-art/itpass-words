@@ -192,9 +192,9 @@ export default function SelectClient() {
             })}
           </div>
 
-          <div className={styles.hint}>
+          {/* <div className={styles.hint}>
             ※ majorをチェックすると配下minorが全部ONになるで（中間状態も表示する）
-          </div>
+          </div> */}
         </section>
 
         {/* 定着度（カテゴリが選ばれた時だけ表示） */}
@@ -218,7 +218,7 @@ export default function SelectClient() {
               })}
             </div>
 
-            <div className={styles.hint}>※ 何も選ばへんかったら全て対象（OR条件）</div>
+            <div className={styles.hint}>※ 何も選ばなければ全て対象</div>
           </section>
         )}
 
@@ -236,7 +236,7 @@ export default function SelectClient() {
                   checked={preset.order === "seq"}
                   onChange={() => setPreset((p) => ({ ...p, order: "seq" }))}
                 />
-                順番どおり（id昇順）
+                順番どおり（ID昇順）
               </label>
               <label className={styles.radioRow}>
                 <input
@@ -267,7 +267,7 @@ export default function SelectClient() {
                   checked={preset.mode === "quiz"}
                   onChange={() => setPreset((p) => ({ ...p, mode: "quiz" }))}
                 />
-                クイズ（4択）
+                テスト（4択）
               </label>
             </div>
           </div>

@@ -9,7 +9,7 @@ export default function HomePage() {
       <Header title="ITパスポート単語アプリ" />
 
       <main className={styles.main}>
-        <DogMascot message="今日も一緒にがんばろ〜！" />
+        <DogMascot message="単語帳モードとテストモードがあるで" />
 
         <div className={styles.buttons}>
           <Link href="/select" className={styles.primary}>
