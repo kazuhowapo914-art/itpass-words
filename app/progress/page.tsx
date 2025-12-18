@@ -183,7 +183,7 @@ function cheerMessage(perfectPct: number) {
         {/* 全体 */}
         <section className={styles.card} style={{ position: "relative" }}>
             <img
-    src="/dogs/dog-cheer.png"
+    src="/dog/dog-cheer.png"
     // alt="応援してくれる犬"
     className={styles.dogImg}
   />
