@@ -69,7 +69,7 @@ const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
   1: "わからない",
   2: "覚えかけ",
-  3: "もうちょい",
+  3: "覚えた",
   4: "完璧",
 };
 
@@ -264,7 +264,7 @@ const presetKey = useMemo(() => {
         <main className={styles.main}>
           <div className={styles.card}>
             <div className={styles.emptyTitle}>出題できる単語が無かった…</div>
-            <div className={styles.emptyHint}>条件をゆるめるか、words.json を増やしてな。</div>
+            <div className={styles.emptyHint}>条件をゆるめてください。</div>
 
             <div className={styles.emptyActions}>
               <button className={styles.btnGhost} onClick={goSelect}>
@@ -291,7 +291,7 @@ const presetKey = useMemo(() => {
           <div className={styles.card}>
             <div className={styles.betweenTitle}>おつかれ！{loop}周目おわり🐶</div>
             <div className={styles.betweenHint}>
-              次の周に進むか、今の範囲でテスト（6択クイズ）してみよか？
+              次の周に進むか、今の範囲でテスト（4択）するか選ぶ
             </div>
 
             <div className={styles.betweenActions}>
@@ -300,7 +300,7 @@ const presetKey = useMemo(() => {
               </button>
 
               <button className={styles.btnGood} onClick={startQuizFromSelection}>
-                選択した出題範囲でテスト（6択） →
+                選択した出題範囲でテスト（4択） →
               </button>
             </div>
 
@@ -360,7 +360,7 @@ const presetKey = useMemo(() => {
             {showMeaning ? (
               <div className={styles.meaning}>{current.meaning}</div>
             ) : (
-              <div className={styles.meaningHidden}>（頭の中で答えてから “見る” 推奨やで）</div>
+              <div className={styles.meaningHidden}>（頭の中で答えてから “見る” 推奨）</div>
             )}
           </div>
 
@@ -377,7 +377,7 @@ const presetKey = useMemo(() => {
             <button className={styles.btnBack} onClick={prevWord} disabled={transition !== "none"}>
               ← 前へ
             </button>
-            <div className={styles.hintText}>評価を押すと記録して次の単語へ進むで</div>
+            <div className={styles.hintText}>評価を押すと記録して次の単語へ進む</div>
           </div>
 
           <div className={styles.actions}>
@@ -388,7 +388,7 @@ const presetKey = useMemo(() => {
               覚えかけ →
             </button>
             <button className={styles.btnGood} onClick={() => rate(3)} disabled={transition !== "none"}>
-              もうちょい →
+              覚えた →
             </button>
             <button className={styles.btnSkip} onClick={skip} disabled={transition !== "none"}>
               スキップ →

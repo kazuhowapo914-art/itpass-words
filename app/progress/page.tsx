@@ -29,7 +29,7 @@ const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
   1: "わからない",
   2: "覚えかけ",
-  3: "もうちょい",
+  3: "覚えた",
   4: "完璧",
 };
 
@@ -152,7 +152,7 @@ function cheerMessage(perfectPct: number) {
   if (perfectPct >= 80) return "もうプロやん！";
   if (perfectPct >= 50) return "だいぶ仕上がってきたで！";
   if (perfectPct >= 20) return "コツコツえらい！";
-  return "今からや、気楽にいこ🐶";
+  return "気楽にいこう！";
 }
 
 

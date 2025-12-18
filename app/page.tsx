@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 export default function HomePage() {
   return (
     <>
-      <Header title="ITパスポート単語アプリ" />
+      <Header title="ばり関西弁で教えてくる、ITパスポート単語アプリ" />
 
       <main className={styles.main}>
         <DogMascot message="単語帳モードとテストモードがあるで" />

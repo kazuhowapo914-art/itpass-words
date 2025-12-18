@@ -83,7 +83,7 @@ const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
   1: "わからない",
   2: "覚えかけ",
-  3: "もうちょい",
+  3: "覚えた",
   4: "完璧",
 };
 
@@ -376,14 +376,14 @@ export default function QuizClient() {
   if (!pool.length) {
     return (
       <>
-        <Header title="クイズ" right="" />
+        <Header title="テスト" right="" />
         <main className={styles.main}>
           <div className={styles.card}>
-            <div className={styles.emptyTitle}>クイズを作れへんかった…</div>
+            <div className={styles.emptyTitle}>クイズを作れなかった…</div>
             <div className={styles.emptyHint}>
-              条件の単語が少ないか、4択に必要な誤答が足りへんかったみたい。
+              条件の単語が少ないか、4択に必要な誤答が足りない可能性があります。
               <br />
-              条件をゆるめるか、words.json を増やしてな。
+              条件をゆるめてください。
             </div>
 
             <div className={styles.emptyActions}>
@@ -406,7 +406,7 @@ export default function QuizClient() {
 
     return (
       <>
-        <Header title="クイズ結果" right={`${correct}/${answered} 正答`} />
+        <Header title="テスト結果" right={`${correct}/${answered} 正答`} />
 
         <main className={styles.main}>
           <div className={styles.card}>
@@ -442,7 +442,7 @@ export default function QuizClient() {
 
   return (
     <>
-      <Header title="クイズ" right={headerRight} />
+      <Header title="テスト" right={headerRight} />
 
       <main className={styles.main}>
         <div className={`${styles.toast} ${toast ? styles.toastShow : ""}`} aria-live="polite">

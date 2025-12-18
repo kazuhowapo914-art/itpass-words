@@ -15,11 +15,9 @@ export const TROPHIES: Trophy[] = Array.from({ length: 20 }, (_, i) => {
   return {
     idx,
     title: `トロフィー ${idx}`,
-    dogSrc: `/trophies/dog-${pad2(idx)}.png`,
+    dogSrc: `/trophies/dog-${pad2(idx)}.webp`,
     message: [
-      `やったー！トロフィー${idx}こめ獲得やで！`,
-      `コツコツ続けてるの、ちゃんと積み上がってるで🐶`,
-      `次もいける！焦らんでええから一歩ずつな。`,
+      `トロフィー${idx}こめ獲得`
     ].join("\n"),
   };
 });
