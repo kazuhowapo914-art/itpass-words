@@ -484,7 +484,7 @@ export default function QuizClient() {
           {isCorrect === null && (
             <div className={styles.skipRow}>
               <button className={styles.btnSkipAction} onClick={skipAsWrong}>
-                スキップ（わからん） →
+                スキップ →
               </button>
             </div>
           )}
@@ -520,7 +520,7 @@ export default function QuizClient() {
             </div>
           )}
 
-          {isCorrect === null && <div className={styles.hintText}>4択を選んでな（答えたら解説が出るで）</div>}
+          {isCorrect === null && <div className={styles.hintText}>4択を選ぶ（答えたら解説が出る）</div>}
         </section>
 
         <div className={styles.bottomNav}>

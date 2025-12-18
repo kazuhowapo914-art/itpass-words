@@ -54,6 +54,19 @@ export default function SelectClient() {
     const saved = loadPreset();
     setPreset(mergePreset(urlPreset, saved));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    const startLast = searchParams.get("startLast") === "1";
+if (startLast) {
+  const saved = loadPreset();
+  const p = mergePreset(null, saved); // いつもの復元ロジックでOK
+  savePreset(p);
+
+  const q = presetToQuery(p);
+  router.replace("/select"); // URLを綺麗に戻す（任意）
+  router.push(p.mode === "study" ? `/study${q}` : `/quiz${q}`);
+  return;
+}
+
   }, []);
 
   // state -> URL同期（再現性）
@@ -113,8 +126,8 @@ export default function SelectClient() {
     setPreset((p) => ({ ...p, levels: Array.from(nextLv).sort((a, b) => a - b) as Level[] }));
   }
 
-  // minorを選んだら定着度フィルタ出す（仕様）
-  const showLevelFilter = preset.categoryIds.length > 0;
+  // minorを選んでなくても定着度フィルタ出す（仕様）
+  const showLevelFilter = preset.categoryIds.length >= 0;
 
   const summaryRight = useMemo(() => {
     const catText = preset.categoryIds.length ? `${preset.categoryIds.length}カテゴリ` : "全カテゴリ";
@@ -139,7 +152,7 @@ export default function SelectClient() {
       <main className={styles.main}>
         <div className={styles.topRow}>
           <button className={styles.softBtn} onClick={applyTodayRecommend}>
-            今日のおすすめ ✨
+            今日のおすすめ
           </button>
 
           <button className={styles.softBtn} onClick={clearAll}>

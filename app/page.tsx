@@ -13,12 +13,12 @@ export default function HomePage() {
 
         <div className={styles.buttons}>
           <Link href="/select" className={styles.primary}>
-            学習する
+            学習する(単語帳モード/テストモード)
           </Link>
 
-          <Link href="/start-last" className={styles.secondary}>
+          {/* <Link href="/select?startLast=1" className={styles.secondary}>
             前回の条件で開始
-          </Link>
+          </Link> */}
 
           <Link href="/progress" className={styles.secondary}>
             進捗確認

@@ -149,15 +149,15 @@ export default function ProgressPage() {
   }
 
 function cheerMessage(perfectPct: number) {
-  if (perfectPct >= 80) return "もうプロやん！";
-  if (perfectPct >= 50) return "だいぶ仕上がってきたで！";
-  if (perfectPct >= 20) return "コツコツえらい！";
-  return "気楽にいこう！";
+  if (perfectPct >= 80) return "もう天才やん...";
+  if (perfectPct >= 50) return "だいぶ仕上がってきたな";
+  if (perfectPct >= 20) return "コツコツいこ！";
+  return "気楽にいこ！";
 }
 
 
   function onResetAll() {
-    const ok = window.confirm("進捗（定着度）と前回条件と累計正解数を全部リセットするで？ほんまにええ？");
+    const ok = window.confirm("進捗（定着度）と前回条件と累計正解数を全てリセットする？");
     if (!ok) return;
     resetAll();
     setProgress({});
@@ -183,7 +183,7 @@ function cheerMessage(perfectPct: number) {
         {/* 全体 */}
         <section className={styles.card} style={{ position: "relative" }}>
             <img
-    src="/dog/dog-cheer.png"
+    src="/dog/dog-cheer.webp"
     // alt="応援してくれる犬"
     className={styles.dogImg}
   />
@@ -327,7 +327,7 @@ function cheerMessage(perfectPct: number) {
         </section>
 
         <div style={{ marginTop: 14, opacity: 0.7, fontSize: 12 }}>
-          ※ 未学習は「まだ一度も単語帳/クイズで触ってない単語」やで
+          ※ 未学習は「まだ一度も単語帳/クイズで触ってない単語」
         </div>
 
         <div style={{ marginTop: 16 }}>
@@ -342,7 +342,7 @@ function cheerMessage(perfectPct: number) {
               fontWeight: 800,
             }}
           >
-            全進捗リセット（危険）
+            全進捗リセット
           </button>
         </div>
       </main>
