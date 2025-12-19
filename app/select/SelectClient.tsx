@@ -127,7 +127,7 @@ if (startLast) {
   }
 
   // minorを選んでなくても定着度フィルタ出す（仕様）
-  const showLevelFilter = preset.categoryIds.length >= 0;
+  const showLevelFilter = preset.categoryIds.length > 0;
 
   const summaryRight = useMemo(() => {
     const catText = preset.categoryIds.length ? `${preset.categoryIds.length}カテゴリ` : "全カテゴリ";
