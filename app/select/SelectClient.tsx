@@ -14,6 +14,10 @@ import { mergePreset, presetToQuery, queryToPreset } from "@/lib/engine";
 
 import styles from "./page.module.css";
 
+import { fetchWords } from "@/lib/words";
+import type { Word } from "@/types/word";
+import { loadProgress, getLevel } from "@/lib/storage";
+
 const LEVEL_UI: Record<Level, string> = {
   0: "未学習",
   1: "わからない",
@@ -45,6 +49,9 @@ export default function SelectClient() {
   }, [majorKeys]);
 
   const [preset, setPreset] = useState<SelectPreset>(DEFAULT_PRESET);
+  const [words, setWords] = useState<Word[]>([]);
+const [progress, setProgress] = useState<Record<number, number>>({});
+
 
   // 初期化：URL優先 → localStorage → default
   useEffect(() => {
@@ -66,6 +73,8 @@ if (startLast) {
   router.push(p.mode === "study" ? `/study${q}` : `/quiz${q}`);
   return;
 }
+setProgress(loadProgress());
+fetchWords().then(setWords).catch(console.error);
 
   }, []);
 
@@ -128,6 +137,26 @@ if (startLast) {
 
   // minorを選んでなくても定着度フィルタ出す（仕様）
   const showLevelFilter = preset.categoryIds.length > 0;
+
+const questionCount = useMemo(() => {
+  if (!words.length) return 0;
+
+  // 1) カテゴリ絞り
+  const byCat =
+    preset.categoryIds.length === 0
+      ? words
+      : words.filter((w) => preset.categoryIds.includes(w.categoryId));
+
+  // 2) レベル絞り（カテゴリ選択がある時だけ有効）
+  const useLevel = preset.categoryIds.length > 0 && preset.levels.length > 0;
+
+  const byLv = !useLevel
+    ? byCat
+    : byCat.filter((w) => preset.levels.includes(getLevel(progress as any, w.id) as any));
+
+  return byLv.length;
+}, [words, preset.categoryIds, preset.levels, progress]);
+
 
   const summaryRight = useMemo(() => {
     const catText = preset.categoryIds.length ? `${preset.categoryIds.length}カテゴリ` : "全カテゴリ";
@@ -289,7 +318,7 @@ if (startLast) {
         {/* 下固定：開始ボタン */}
         <div className={styles.bottomBar}>
           <button className={styles.startBtn} onClick={start}>
-            学習開始 ▶
+            学習開始 <span className={styles.startSub}>（問題数 {questionCount}問）</span> ▶
           </button>
         </div>
 

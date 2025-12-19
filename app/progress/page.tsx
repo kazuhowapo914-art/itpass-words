@@ -157,7 +157,7 @@ function cheerMessage(perfectPct: number) {
 
 
   function onResetAll() {
-    const ok = window.confirm("進捗（定着度）と前回条件と累計正解数を全てリセットする？");
+    const ok = window.confirm("進捗（定着度）と前回条件と累計正解数を全てリセットしますか？");
     if (!ok) return;
     resetAll();
     setProgress({});
@@ -183,8 +183,9 @@ function cheerMessage(perfectPct: number) {
         {/* 全体 */}
         <section className={styles.card} style={{ position: "relative" }}>
             <img
-    src="/dog/dog-cheer.webp"
+    src="/dog/dog-sleep.webp"
     // alt="応援してくれる犬"
+
     className={styles.dogImg}
   />
   <div className={styles.dogMsg}>
@@ -240,7 +241,7 @@ function cheerMessage(perfectPct: number) {
                     {unlocked ? `🏆 ${t.title}` : `🔒 ???`}
                   </div>
                   <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
-                    {unlocked ? t.message : "あと"+(i-1)+(10 - (totalCorrect % 10))+"問…！"}
+                    {unlocked ? t.message : "あと"+i/10+(10 - (totalCorrect % 10))+"問…！"}
                   </div>
                 </div>
               );
