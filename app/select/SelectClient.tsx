@@ -81,7 +81,7 @@ fetchWords().then(setWords).catch(console.error);
   // state -> URL同期（再現性）
   useEffect(() => {
     const q = presetToQuery(preset);
-    router.replace(`/select${q}`);
+    router.replace(`/select${q}`, { scroll: false });
   }, [preset, router]);
 
   const selectedCats = useMemo(() => new Set(preset.categoryIds), [preset.categoryIds]);
@@ -189,7 +189,7 @@ const questionCount = useMemo(() => {
           </button>
 
           <Link className={styles.softLink} href="/progress">
-            進捗確認 →
+            進捗確認
           </Link>
         </div>
 

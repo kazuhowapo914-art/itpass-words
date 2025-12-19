@@ -248,7 +248,7 @@ function cheerMessage(perfectPct: number) {
       }}
     >
       <div style={{ fontWeight: 800, fontSize: 14 }}>
-        {unlocked ? `🏆 ${t.title}` : `🔒 ???`}
+        {unlocked ? `🏆 ${t.title}` : `🔒`}
       </div>
 
       {/* ✅ messageの代わりに画像 */}
