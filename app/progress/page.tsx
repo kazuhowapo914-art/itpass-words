@@ -103,6 +103,7 @@ export default function ProgressPage() {
   const [totalCorrect, setTotalCorrect] = useState(0);
 
   const [openMajors, setOpenMajors] = useState<Set<MajorKey>>(new Set());
+const [openTrophy, setOpenTrophy] = useState<Trophy | null>(null);
 
   useEffect(() => {
     setProgress(loadProgress());
@@ -224,28 +225,113 @@ function cheerMessage(perfectPct: number) {
           </div>
 
           <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 10 }}>
-            {TROPHIES.slice(0, 20).map((t: Trophy, i: number) => {
-              const unlocked = i < trophyCount;
-              return (
-                <div
-                  key={t.idx}
-                  style={{
-                    border: "1px solid rgba(0,0,0,0.06)",
-                    borderRadius: 16,
-                    padding: 10,
-                    background: unlocked ? "white" : "rgba(0,0,0,0.03)",
-                    opacity: unlocked ? 1 : 0.6,
-                  }}
-                >
-                  <div style={{ fontWeight: 800, fontSize: 14 }}>
-                    {unlocked ? `🏆 ${t.title}` : `🔒 ???`}
-                  </div>
-                  <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
-                    {unlocked ? t.message : "あと"+i/10+(10 - (totalCorrect % 10))+"問…！"}
-                  </div>
-                </div>
-              );
-            })}
+           {TROPHIES.slice(0, 20).map((t: Trophy, i: number) => {
+  const unlocked = i < trophyCount;
+
+  return (
+    <button
+      key={t.idx}
+      type="button"
+      onClick={() => {
+        if (!unlocked) return;        // ✅ 未解放なら何もしない
+        setOpenTrophy(t);             // ✅ 解放済みならポップアップ開く
+      }}
+      disabled={!unlocked}            // ✅ 未解放は押せない
+      style={{
+        border: "1px solid rgba(0,0,0,0.06)",
+        borderRadius: 16,
+        padding: 10,
+        background: unlocked ? "white" : "rgba(0,0,0,0.03)",
+        opacity: unlocked ? 1 : 0.6,
+        textAlign: "left",
+        cursor: unlocked ? "pointer" : "not-allowed",
+      }}
+    >
+      <div style={{ fontWeight: 800, fontSize: 14 }}>
+        {unlocked ? `🏆 ${t.title}` : `🔒 ???`}
+      </div>
+
+      {/* ✅ messageの代わりに画像 */}
+      <div style={{ marginTop: 8 }}>
+        {unlocked ? (
+          <img
+            src={t.imageSrc}
+            alt={t.title}
+            style={{
+              width: "100%",
+              height: 86,
+              objectFit: "cover",
+              borderRadius: 12,
+              display: "block",
+            }}
+          />
+        ) : (
+          <div style={{ fontSize: 12, opacity: 0.75 }}>
+            {"あと" + (10 - (totalCorrect % 10)) + "問…！"}
+          </div>
+        )}
+      </div>
+    </button>
+  );
+})}
+
+{openTrophy && (
+  <div
+    onClick={() => setOpenTrophy(null)}
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.35)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-end",
+      padding: 16,
+      zIndex: 50,
+    }}
+  >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        width: "min(520px, 100%)",
+        background: "white",
+        borderRadius: 20,
+        padding: 14,
+        boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+        <div style={{ fontWeight: 900 }}>{openTrophy.title}</div>
+        <button
+          type="button"
+          onClick={() => setOpenTrophy(null)}
+          style={{
+            border: "1px solid rgba(0,0,0,0.1)",
+            background: "white",
+            borderRadius: 999,
+            padding: "6px 10px",
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+      </div>
+
+      <div style={{ marginTop: 12 }}>
+        <img
+          src={openTrophy.imageSrc}
+          alt={openTrophy.title}
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: 16,
+            display: "block",
+          }}
+        />
+      </div>
+    </div>
+  </div>
+)}
+
 
             {totalCorrect >= 140 && (
               <div

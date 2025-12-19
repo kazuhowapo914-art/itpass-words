@@ -7,6 +7,8 @@ import type { Word } from "@/types/word";
 import { fetchWords } from "@/lib/words";
 import { MAJOR, MINOR, categoryIdLabel, minorName, type MajorKey, type CategoryId } from "@/constants/categories";
 
+import { Header } from "@/components/Header";
+
 function normalize(s: string) {
   return s.toLowerCase();
 }
