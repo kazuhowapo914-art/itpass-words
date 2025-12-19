@@ -16,9 +16,9 @@ export default function HomePage() {
             学習する(単語帳モード/テストモード)
           </Link>
 
-          {/* <Link href="/select?startLast=1" className={styles.secondary}>
-            前回の条件で開始
-          </Link> */}
+          <Link href="/list" className={styles.danger}>
+            単語一覧を見る
+          </Link>
 
           <Link href="/progress" className={styles.progress}>
             進捗確認

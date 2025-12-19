@@ -57,3 +57,21 @@
 .progress:active {
   transform: translateY(1px);
 } 
+
+.danger {
+  background: var(--color-danger);
+  color: white;
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.danger:hover {
+  opacity: 0.9;
+}
+
+.danger:active {
+  transform: translateY(1px);
+} 
