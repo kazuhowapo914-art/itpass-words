@@ -7,6 +7,7 @@
   --color-warning: #ffd6a5;  /* 薄オレンジ */
   --color-danger: #ffadad;   /* 赤系 */
   --color-text: #333;
+    --color-progress: #8cd8dd;  /* 黄緑 */
 
   /*  UIルール */
   --radius-lg: 20px;

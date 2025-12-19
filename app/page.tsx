@@ -20,7 +20,7 @@ export default function HomePage() {
             前回の条件で開始
           </Link> */}
 
-          <Link href="/progress" className={styles.success}>
+          <Link href="/progress" className={styles.progress}>
             進捗確認
           </Link>
         </div>

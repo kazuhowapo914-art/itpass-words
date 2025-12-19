@@ -68,8 +68,8 @@ function applyFilters(words: Word[], preset: SelectPreset, progress: Record<numb
   const byCategory =
     preset.categoryIds.length === 0 ? words : words.filter((w) => preset.categoryIds.includes(w.categoryId));
 
-  // 仕様：levelsフィルタはカテゴリ選択がある時だけ有効
-  const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length > 0;
+  // 仕様：levelsフィルタはカテゴリ選択がなくても有効
+  const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length >= 0;
   const byLevel = !useLevelFilter
     ? byCategory
     : byCategory.filter((w) => preset.levels.includes(getLevel(progress, w.id)));
@@ -99,11 +99,11 @@ function pickCommentBucket(accuracy: number) {
 }
 
 const COMMENTS: Record<number, string[]> = {
-  0: ["だいじょぶ、最初はみんな0点からやで。次いこ次いこ！", "目つぶってたん？…うそ。ここから伸びるやつ！"],
-  1: ["ええやん、伸びしろしかないわ。", "ちょいずつ当たりだしてる！この調子！"],
-  2: ["半分見えてきたで。ここから一気に上がる！", "ええ感じ。基礎が固まってきてる！"],
-  3: ["だいぶ強い。あと一押しで無双やで。", "もうそれ、合格圏の匂いしてる。"],
-  4: ["天才なん？もう教えることあらへん…（うれしい）", "強すぎ。こっちがテストされてる気分やわ。"],
+  0: ["目つぶってたんよな？"],
+  1: ["ええやん、伸びしろ。", "ちょいずつ当たりだしてる！この調子！"],
+  2: ["半分見えてきた。ここから一気に上がる！", "ええ感じ。基礎が固まってきてる！"],
+  3: ["だいぶ強い。あと一押しで無双。", "合格圏の匂いしてる。"],
+  4: ["天才なん？もう教えることないわ。", "強すぎ。こっちがテストされてる気分やわ。"],
 };
 
 function sampleOne<T>(arr: T[]): T {
@@ -273,7 +273,7 @@ export default function QuizClient() {
   function makeLevelMessage(before: Level, after: Level, ok: boolean) {
     if (ok) {
       if (before === 4 && after === 4) {
-        return "定着度は完璧です。";
+        return "定着度は完璧。";
       }
       return `定着度を「${LEVEL_LABEL[before]}」から「${LEVEL_LABEL[after]}」にUP！`;
     }

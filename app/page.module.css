@@ -40,8 +40,8 @@
   box-shadow: var(--shadow-soft);
 }
 
-.success {
-  background: var(--color-success);
+.progress {
+  background: var(--color-progress);
   color: white;
   padding: var(--space-md);
   border-radius: var(--radius-lg);
@@ -50,10 +50,10 @@
   font-weight: 700;
 }
 
-.success:hover {
+.progress:hover {
   opacity: 0.9;
 }
 
-.success:active {
+.progress:active {
   transform: translateY(1px);
 } 
