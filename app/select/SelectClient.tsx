@@ -18,6 +18,10 @@ import { fetchWords } from "@/lib/words";
 import type { Word } from "@/types/word";
 import { loadProgress, getLevel } from "@/lib/storage";
 
+import { buildPool } from "@/lib/engine";
+import type { Progress } from "@/lib/storage";
+
+
 const LEVEL_UI: Record<Level, string> = {
   0: "未学習",
   1: "わからない",
@@ -50,39 +54,71 @@ export default function SelectClient() {
 
   const [preset, setPreset] = useState<SelectPreset>(DEFAULT_PRESET);
   const [words, setWords] = useState<Word[]>([]);
-const [progress, setProgress] = useState<Record<number, number>>({});
+const [progress, setProgress] = useState<Progress>({});
 
+useEffect(() => {
+  // ① words / progress を読む（1回）
+  fetchWords().then(setWords).catch(console.error);
+  setProgress(loadProgress());
 
-  // 初期化：URL優先 → localStorage → default
-  useEffect(() => {
-    const urlHasAny = searchParams.toString().length > 0;
-    const urlPreset = urlHasAny ? queryToPreset(searchParams) : null;
-
+  // ② startLast があるなら即開始（preset は localStorage のみでOK）
+  const startLast = searchParams.get("startLast") === "1";
+  if (startLast) {
     const saved = loadPreset();
-    setPreset(mergePreset(urlPreset, saved));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const p = mergePreset(null, saved);
+    savePreset(p);
 
-    const startLast = searchParams.get("startLast") === "1";
-if (startLast) {
+    const q = presetToQuery(p);
+    router.replace("/select"); // URLきれいに（任意）
+    router.push(p.mode === "study" ? `/study${q}` : `/quiz${q}`);
+    return;
+  }
+
+  // ③ ふつうの初期化：URL優先 → localStorage → default
+  const urlHasAny = searchParams.toString().length > 0;
+  const urlPreset = urlHasAny ? queryToPreset(searchParams) : null;
+
   const saved = loadPreset();
-  const p = mergePreset(null, saved); // いつもの復元ロジックでOK
-  savePreset(p);
+  setPreset(mergePreset(urlPreset, saved));
 
-  const q = presetToQuery(p);
-  router.replace("/select"); // URLを綺麗に戻す（任意）
-  router.push(p.mode === "study" ? `/study${q}` : `/quiz${q}`);
-  return;
-}
-setProgress(loadProgress());
-fetchWords().then(setWords).catch(console.error);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
-  }, []);
+//   // 初期化：URL優先 → localStorage → default
+//   useEffect(() => {
+//     const urlHasAny = searchParams.toString().length > 0;
+//     const urlPreset = urlHasAny ? queryToPreset(searchParams) : null;
+
+//     const saved = loadPreset();
+//     setPreset(mergePreset(urlPreset, saved));
+
+//       // ✅ 追加：words / progress を読む
+//   fetchWords().then(setWords).catch(console.error);
+//   setProgress(loadProgress());
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    
+//     const startLast = searchParams.get("startLast") === "1";
+// if (startLast) {
+//   const saved = loadPreset();
+//   const p = mergePreset(null, saved); // いつもの復元ロジックでOK
+//   savePreset(p);
+
+//   const q = presetToQuery(p);
+//   router.replace("/select"); // URLを綺麗に戻す（任意）
+//   router.push(p.mode === "study" ? `/study${q}` : `/quiz${q}`);
+//   return;
+// }
+// setProgress(loadProgress());
+// fetchWords().then(setWords).catch(console.error);
+
+//   }, []);
 
   // state -> URL同期（再現性）
-  useEffect(() => {
-    const q = presetToQuery(preset);
-    router.replace(`/select${q}`, { scroll: false });
-  }, [preset, router]);
+  // useEffect(() => {
+  //   const q = presetToQuery(preset);
+  //   router.replace(`/select${q}`, { scroll: false });
+  // }, [preset, router]);
 
   const selectedCats = useMemo(() => new Set(preset.categoryIds), [preset.categoryIds]);
   const selectedLv = useMemo(() => new Set(preset.levels), [preset.levels]);
@@ -138,24 +174,29 @@ fetchWords().then(setWords).catch(console.error);
   // minorを選んでなくても定着度フィルタ出す（仕様）
   const showLevelFilter = preset.categoryIds.length > 0;
 
-const questionCount = useMemo(() => {
+  const questionCount = useMemo(() => {
   if (!words.length) return 0;
+  return buildPool(words, preset, progress).length;
+}, [words, preset, progress]);
 
-  // 1) カテゴリ絞り
-  const byCat =
-    preset.categoryIds.length === 0
-      ? words
-      : words.filter((w) => preset.categoryIds.includes(w.categoryId));
+// const questionCount = useMemo(() => {
+//   if (!words.length) return 0;
 
-  // 2) レベル絞り（カテゴリ選択がある時だけ有効）
-  const useLevel = preset.categoryIds.length > 0 && preset.levels.length > 0;
+//   // 1) カテゴリ絞り
+//   const byCat =
+//     preset.categoryIds.length === 0
+//       ? words
+//       : words.filter((w) => preset.categoryIds.includes(w.categoryId));
 
-  const byLv = !useLevel
-    ? byCat
-    : byCat.filter((w) => preset.levels.includes(getLevel(progress as any, w.id) as any));
+//   // 2) レベル絞り（カテゴリ選択がある時だけ有効）
+//   const useLevel = preset.categoryIds.length > 0 && preset.levels.length > 0;
 
-  return byLv.length;
-}, [words, preset.categoryIds, preset.levels, progress]);
+//   const byLv = !useLevel
+//     ? byCat
+//     : byCat.filter((w) => preset.levels.includes(getLevel(progress as any, w.id) as any));
+
+//   return byLv.length;
+// }, [words, preset.categoryIds, preset.levels, progress]);
 
 
   const summaryRight = useMemo(() => {
@@ -318,7 +359,7 @@ const questionCount = useMemo(() => {
         {/* 下固定：開始ボタン */}
         <div className={styles.bottomBar}>
           <button className={styles.startBtn} onClick={start}>
-            学習開始 <span className={styles.startSub}>（問題数 {questionCount}問）</span> ▶
+            学習開始 <span className={styles.startSub}>（問題数 {buildPool(words, preset, progress).length}問）</span> ▶
           </button>
         </div>
 

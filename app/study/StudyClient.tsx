@@ -164,7 +164,7 @@ const presetKey = useMemo(() => {
   const headerRight = useMemo(() => {
     const total = pool.length;
     const pos = total ? idx + 1 : 0;
-    return total ? `${loop}周目 / ${pos}/${total}` : `${loop}周目`;
+    return total ? `${loop}周目 : ${pos}/${total}` : `${loop}周目`;
   }, [idx, loop, pool.length]);
 
   function goHome() {

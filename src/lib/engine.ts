@@ -1,6 +1,40 @@
 import type { SelectPreset, Level } from "./selectPreset";
 import { DEFAULT_PRESET } from "./selectPreset";
 
+// src/lib/engine.ts
+
+import type { Word } from "@/types/word";
+import type { Progress } from "@/lib/storage";
+import { getLevel } from "@/lib/storage";
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ✅ これを全画面で使う
+export function buildPool(words: Word[], preset: SelectPreset, progress: Progress): Word[] {
+  const byCategory =
+    preset.categoryIds.length === 0
+      ? words
+      : words.filter((w) => preset.categoryIds.includes(w.categoryId));
+
+  // 仕様：カテゴリ選択がある時だけ levels 有効
+  const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length > 0;
+
+  const byLevel = useLevelFilter
+    ? byCategory
+    : byCategory.filter((w) => preset.levels.includes(getLevel(progress, w.id) as Level));
+
+  const base = [...byLevel].sort((a, b) => a.id - b.id);
+  return preset.order === "seq" ? base : shuffle(base);
+}
+
+
 function uniq<T>(arr: T[]) {
   return Array.from(new Set(arr));
 }
