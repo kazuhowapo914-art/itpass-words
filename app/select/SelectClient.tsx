@@ -205,7 +205,7 @@ useEffect(() => {
     const catText = preset.categoryIds.length ? `${preset.categoryIds.length}カテゴリ` : "全カテゴリ";
     const lvText = preset.levels.length ? `Lv:${preset.levels.join(",")}` : "全Lv";
     const modeText = preset.mode === "study" ? "単語帳" : "テスト";
-    const orderText = preset.order === "seq" ? "順番" : "ランダム";
+    const orderText = preset.order === "seq" ? "ID順" : "ランダム";
     return `${catText} / ${showLevelFilter ? lvText : "Lv:—"} / ${modeText} / ${orderText}`;
   }, [preset, showLevelFilter]);
 

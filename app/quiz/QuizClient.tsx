@@ -153,6 +153,12 @@ export default function QuizClient() {
     if (!preset) return "";
     return [(preset.categoryIds ?? []).join(","), (preset.levels ?? []).join(","), preset.order].join("|");
   }, [preset]);
+  
+useEffect(() => {
+  // 次の問題に切り替わったタイミングで、必ず画面上へ戻す
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}, [qIndex]);
+
 
   // 初期ロード
   useEffect(() => {
@@ -424,7 +430,7 @@ export default function QuizClient() {
 
             <div className={styles.resultActions}>
               <button className={styles.btnPrimary} onClick={retrySameCondition}>
-                もう一回（同条件） →
+                もう一回（同条件） ▶
               </button>
               <button className={styles.btnGhost} onClick={goSelect}>
                 条件を変える
@@ -454,7 +460,7 @@ export default function QuizClient() {
         <section className={styles.card}>
           <div className={styles.metaRow}>
             <div className={styles.category}>{categoryIdLabel(current.categoryId)}</div>
-            <div className={styles.small}>{preset?.order === "seq" ? "順番どおり" : "ランダム"}</div>
+            <div className={styles.small}>{preset?.order === "seq" ? "ID順番" : "ランダム"}</div>
           </div>
 
           <div className={styles.questionLabel}>問題</div>
@@ -486,7 +492,7 @@ export default function QuizClient() {
           {isCorrect === null && (
             <div className={styles.skipRow}>
               <button className={styles.btnSkipAction} onClick={skipAsWrong}>
-                スキップ →
+                スキップ ▶
               </button>
             </div>
           )}
@@ -516,7 +522,7 @@ export default function QuizClient() {
               {/* ④ 次へは右寄せ＆横長 */}
               <div className={styles.nextRow}>
                 <button className={styles.btnNext} onClick={next}>
-                  次へ →
+                  次へ ▶
                 </button>
               </div>
             </div>

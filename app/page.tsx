@@ -44,9 +44,9 @@ export default function HomePage() {
     priority
   />
 
-  <div style={{ fontSize: 12, opacity: 0.7, marginTop: 8 }}>
+  {/* <div style={{ fontSize: 12, opacity: 0.7, marginTop: 8 }}>
     ※ 単語帳とテストで更新ルールが違うで
-  </div>
+  </div> */}
 </div>
       </main>
     </>
