@@ -67,7 +67,19 @@ export function loadProgress(): Progress {
   for (const [k, v] of Object.entries(obj)) {
     const id = Number(k);
     if (!Number.isFinite(id)) continue;
-    if (isLevel(v)) out[id] = v;
+     // ✅ 1) numberならそのまま
+  if (isLevel(v)) {
+    out[id] = v;
+    continue;
+  }
+
+  // ✅ 2) "1" みたいな文字列数値も Level に変換
+  if (typeof v === "string") {
+    const n = Number(v);
+    if (Number.isFinite(n) && isLevel(n)) {
+      out[id] = n;
+    }
+  }
   }
   return out;
 }

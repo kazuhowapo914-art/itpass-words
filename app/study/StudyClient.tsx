@@ -14,6 +14,8 @@ import { Header } from "@/components/Header";
 
 import styles from "./page.module.css";
 
+import { buildPool } from "@/lib/engine";
+
 // -------- URL -> preset（study用）--------
 function presetFromUrl(params: URLSearchParams): SelectPreset | null {
   const cats = (params.get("cats") ?? "")
@@ -53,17 +55,17 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function applyFilters(words: Word[], preset: SelectPreset, progress: Record<number, Level>) {
-  const byCategory =
-    preset.categoryIds.length === 0 ? words : words.filter((w) => preset.categoryIds.includes(w.categoryId));
+// function applyFilters(words: Word[], preset: SelectPreset, progress: Record<number, Level>) {
+//   const byCategory =
+//     preset.categoryIds.length === 0 ? words : words.filter((w) => preset.categoryIds.includes(w.categoryId));
 
-  // 仕様：levelsフィルタはカテゴリ選択がある時だけ有効
-  const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length > 0;
-  const byLevel = !useLevelFilter ? byCategory : byCategory.filter((w) => preset.levels.includes(getLevel(progress, w.id)));
+//   // 仕様：levelsフィルタはカテゴリ選択がある時だけ有効
+//   const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length >= 0;
+//   const byLevel = !useLevelFilter ? byCategory : byCategory.filter((w) => preset.levels.includes(getLevel(progress, w.id)));
 
-  const base = [...byLevel].sort((a, b) => a.id - b.id);
-  return preset.order === "seq" ? base : shuffle(base);
-}
+//   const base = [...byLevel].sort((a, b) => a.id - b.id);
+//   return preset.order === "seq" ? base : shuffle(base);
+// }
 
 const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
@@ -147,7 +149,7 @@ const presetKey = useMemo(() => {
   useEffect(() => {
   if (!words.length || !preset) return;
 
-  const nextPool = applyFilters(words, preset, progress);
+  const nextPool = buildPool(words, preset, progress);
 
   setPool(nextPool);
   setIdx(0);

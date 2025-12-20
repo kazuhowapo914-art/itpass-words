@@ -30,6 +30,8 @@ const LEVEL_UI: Record<Level, string> = {
   4: "完璧",
 };
 
+             const LEVELS: Level[] = [0, 1, 2, 3, 4];
+
 function toggleSet<T>(set: Set<T>, v: T) {
   const next = new Set(set);
   if (next.has(v)) next.delete(v);
@@ -286,19 +288,20 @@ useEffect(() => {
             <div className={styles.sectionTitle}>定着度（複数選択OK）</div>
 
             <div className={styles.levelRow}>
-              {(Object.keys(LEVEL_UI) as unknown as Level[]).map((lv) => {
-                const checked = selectedLv.has(lv);
-                return (
-                  <button
-                    key={lv}
-                    className={`${styles.levelPill} ${checked ? styles.levelPillOn : ""}`}
-                    onClick={() => toggleLevel(lv)}
-                    type="button"
-                  >
-                    {LEVEL_UI[lv]}
-                  </button>
-                );
-              })}
+{LEVELS.map((lv) => {
+  const checked = selectedLv.has(lv);
+  return (
+    <button
+      key={lv}
+      className={`${styles.levelPill} ${checked ? styles.levelPillOn : ""}`}
+      onClick={() => toggleLevel(lv)}
+      type="button"
+    >
+      {LEVEL_UI[lv]}
+    </button>
+  );
+})}
+
             </div>
 
             <div className={styles.hint}>※ 何も選ばなければ全て対象</div>
@@ -359,7 +362,7 @@ useEffect(() => {
         {/* 下固定：開始ボタン */}
         <div className={styles.bottomBar}>
           <button className={styles.startBtn} onClick={start}>
-            学習開始 <span className={styles.startSub}>（問題数 {buildPool(words, preset, progress).length}問）</span> ▶
+            学習開始 <span className={styles.startSub}>（問題数 {questionCount}問）</span> ▶
           </button>
         </div>
 

@@ -23,10 +23,10 @@ export function buildPool(words: Word[], preset: SelectPreset, progress: Progres
       ? words
       : words.filter((w) => preset.categoryIds.includes(w.categoryId));
 
-  // 仕様：カテゴリ選択がある時だけ levels 有効
+// 仕様：カテゴリ選択があり、かつ levels を1つ以上選んだ時だけ有効
   const useLevelFilter = preset.categoryIds.length > 0 && preset.levels.length > 0;
 
-  const byLevel = useLevelFilter
+  const byLevel = !useLevelFilter
     ? byCategory
     : byCategory.filter((w) => preset.levels.includes(getLevel(progress, w.id) as Level));
 
