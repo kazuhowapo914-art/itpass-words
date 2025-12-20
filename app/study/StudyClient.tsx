@@ -69,7 +69,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
-  1: "わからない",
+  1: "覚えてない",
   2: "覚えかけ",
   3: "覚えた",
   4: "完璧",
@@ -389,7 +389,7 @@ const presetKey = useMemo(() => {
 
           <div className={styles.actions}>
             <button className={styles.btnBad} onClick={() => rate(1)} disabled={transition !== "none"}>
-              わからない →
+              覚えてない →
             </button>
             <button className={styles.btnMid} onClick={() => rate(2)} disabled={transition !== "none"}>
               覚えかけ →

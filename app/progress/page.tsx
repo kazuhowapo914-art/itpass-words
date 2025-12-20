@@ -27,7 +27,7 @@ type LevelCounts = Record<Level, number>;
 const LEVELS: Level[] = [0, 1, 2, 3, 4];
 const LEVEL_LABEL: Record<Level, string> = {
   0: "未学習",
-  1: "わからない",
+  1: "覚えてない",
   2: "覚えかけ",
   3: "覚えた",
   4: "完璧",

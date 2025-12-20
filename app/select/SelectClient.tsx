@@ -24,7 +24,7 @@ import type { Progress } from "@/lib/storage";
 
 const LEVEL_UI: Record<Level, string> = {
   0: "未学習",
-  1: "わからない",
+  1: "覚えてない",
   2: "覚えかけ",
   3: "覚えた",
   4: "完璧",
