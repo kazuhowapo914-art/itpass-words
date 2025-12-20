@@ -27,3 +27,27 @@
   font-size: 12px;
   opacity: 0.8;
 }
+
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.headerRight {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.05);
+}
