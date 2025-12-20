@@ -25,6 +25,8 @@ import { Header } from "@/components/Header";
 
 import styles from "./page.module.css";
 
+import { buildPool } from "@/lib/engine";
+
 // -------- URL -> preset（quiz用）--------
 function presetFromUrl(params: URLSearchParams): SelectPreset | null {
   const cats = (params.get("cats") ?? "")
@@ -99,11 +101,11 @@ function pickCommentBucket(accuracy: number) {
 }
 
 const COMMENTS: Record<number, string[]> = {
-  0: ["目つぶってたんよな？"],
-  1: ["ええやん、伸びしろ。", "ちょいずつ当たりだしてる！この調子！"],
-  2: ["半分見えてきた。ここから一気に上がる！", "ええ感じ。基礎が固まってきてる！"],
-  3: ["だいぶ強い。あと一押しで無双。", "合格圏の匂いしてる。"],
-  4: ["天才なん？もう教えることないわ。", "強すぎ。こっちがテストされてる気分やわ。"],
+  0: ["目つぶってたんよな？",  "焦らずいこう！", "大丈夫、あとは上がるだけ！"],
+  1: ["ええやん、伸びしろ。", "ちょいずつ当たりだしてる！この調子！", "次はもっといける！"],
+  2: ["半分見えてきた。ここから一気に上がる！", "ええ感じ。基礎が固まってきてる！", "ナイス、次も頑張ろう！"],
+  3: ["だいぶ強い。あと一押しで無双。", "合格圏の匂いしてる。", "もう少しで完璧や！"],
+  4: ["天才なん？もう教えることないわ。", "強すぎ。こっちがテストされてる気分やわ。", "パーフェクトおめでとう！"],
 };
 
 function sampleOne<T>(arr: T[]): T {
@@ -184,7 +186,7 @@ export default function QuizClient() {
   useEffect(() => {
     if (!words.length || !preset) return;
 
-    const nextPool = applyFilters(words, preset, progress);
+    const nextPool =   buildPool(words, preset, progress);;
 
     setPool(nextPool);
     setPhase("quiz");
@@ -358,7 +360,7 @@ export default function QuizClient() {
   function retrySameCondition() {
     if (!words.length || !preset) return;
 
-    const nextPool = applyFilters(words, preset, progress);
+    const nextPool =  buildPool(words, preset, progress);;
 
     setPool(nextPool);
     setPhase("quiz");

@@ -180,10 +180,14 @@ const presetKey = useMemo(() => {
   function animateTo(direction: "next" | "prev", after: () => void) {
     setTransition(direction);
     window.setTimeout(() => {
-      after();
-      setShowMeaning(false);
-      setTransition("none");
-    }, TRANS_MS);
+  after();
+  setShowMeaning(false);
+
+  // ✅ 次の単語は先頭から見せる
+  window.scrollTo({ top: 0, left: 0 });
+
+  setTransition("none");
+}, TRANS_MS);
   }
 
   function prevWord() {
@@ -366,12 +370,13 @@ const presetKey = useMemo(() => {
             )}
           </div>
 
-          {current.detail && (
-            <details className={styles.details}>
-              <summary>詳細解説</summary>
-              <div className={styles.detail}>{current.detail}</div>
-            </details>
-          )}
+        {current.detail && (
+  <details key={current.id} className={styles.details}>
+    <summary>詳細解説</summary>
+    <div className={styles.detail}>{current.detail}</div>
+  </details>
+)}
+
         </section>
 
         <footer className={styles.bottomBar}>
