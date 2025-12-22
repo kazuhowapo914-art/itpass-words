@@ -21,6 +21,7 @@ import { loadProgress, getLevel } from "@/lib/storage";
 import { buildPool } from "@/lib/engine";
 import type { Progress } from "@/lib/storage";
 
+import { DogMascot } from "@/components/DogMascot";
 
 const LEVEL_UI: Record<Level, string> = {
   0: "未学習",
@@ -220,6 +221,7 @@ useEffect(() => {
   return (
     <>
       <Header title="学習条件" right={summaryRight} />
+<DogMascot message="単語帳モードで学習して、テストモードで腕試ししよう。" />
 
       <main className={styles.main}>
         <div className={styles.topRow}>

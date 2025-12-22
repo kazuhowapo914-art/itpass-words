@@ -427,6 +427,16 @@ const tone = LEVEL_TONE[lvNow];
   if (phase === "result") {
     const acc = answered ? Math.round((correct / answered) * 100) : 0;
     const mood = acc >= 80 ? "happy" : acc >= 60 ? "smile" : acc >= 40 ? "neutral" : acc >= 20 ? "worry" : "sad";
+const dogSrc =
+  mood === "happy"
+    ? "/dog/happy.webp"
+    : mood === "smile"
+    ? "/dog/smile.webp"
+    : mood === "neutral"
+    ? "/dog/neutral.webp"
+    : mood === "worry"
+    ? "/dog/worry.webp"
+    : "/dog/sad.webp";
 
     return (
       <>
@@ -435,7 +445,7 @@ const tone = LEVEL_TONE[lvNow];
         <main className={styles.main}>
           <div className={styles.card}>
             <div className={styles.resultTop}>
-              <div className={`${styles.dog} ${styles[`dog_${mood}`]}`} aria-hidden />
+              <img className={styles.dogImg} src={dogSrc} alt="結果の犬" />
               <div className={styles.resultText}>
                 <div className={styles.resultScore}>
                   {correct} / {answered}（{acc}%）
