@@ -296,3 +296,37 @@
 .dog_neutral { outline: 3px solid rgba(0,0,0,0.08); }
 .dog_worry { outline: 3px solid rgba(251, 140, 0, 0.22); }
 .dog_sad { outline: 3px solid rgba(198, 40, 40, 0.18); }
+
+/* 上部の行 */
+.metaRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ピル */
+.levelPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.9);
+}
+
+/* ピル色（定着度ごと） */
+.pill_neutral { opacity: 0.85; }
+.pill_bad     { border-color: rgba(236, 128, 5, 0.35); }
+.pill_mid     { border-color: rgba(207, 240, 24, 0.35); }
+.pill_good    { border-color: rgba(29, 128, 20, 0.45); }
+.pill_perfect { border-color: rgba(30, 82, 224, 0.35); }
+
+/* カードのトーン（背景/枠の雰囲気） */
+.tone_neutral { }
+.tone_bad     { box-shadow: 0 10px 30px rgba(229,57,53,0.08); }
+.tone_mid     { box-shadow: 0 10px 30px rgba(251,140,0,0.08); }
+.tone_good    { box-shadow: 0 10px 30px rgba(253,216,53,0.09); }
+.tone_perfect { box-shadow: 0 10px 30px rgba(67,160,71,0.08); }

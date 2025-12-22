@@ -27,6 +27,9 @@ import styles from "./page.module.css";
 
 import { buildPool } from "@/lib/engine";
 
+
+
+
 // -------- URL -> preset（quiz用）--------
 function presetFromUrl(params: URLSearchParams): SelectPreset | null {
   const cats = (params.get("cats") ?? "")
@@ -88,6 +91,15 @@ const LEVEL_LABEL: Record<Level, string> = {
   3: "覚えた",
   4: "完璧",
 };
+
+const LEVEL_TONE: Record<Level, "neutral" | "bad" | "mid" | "good" | "perfect"> = {
+  0: "neutral",
+  1: "bad",
+  2: "mid",
+  3: "good",
+  4: "perfect",
+};
+
 
 type Phase = "quiz" | "result";
 
@@ -209,6 +221,10 @@ useEffect(() => {
   }, [words.length, presetKey]);
 
   const current = pool[qIndex];
+
+  const lvNow: Level = current ? (getLevel(progress, current.id) as Level) : 0;
+const tone = LEVEL_TONE[lvNow];
+
 
   const headerRight = useMemo(() => {
     const total = pool.length;
@@ -457,13 +473,19 @@ useEffect(() => {
           {toast ?? ""}
         </div>
 
-        <section className={styles.card}>
+        <section className={`${styles.card} ${styles[`tone_${tone}`]}`}>
           <div className={styles.metaRow}>
             <div className={styles.category}>{categoryIdLabel(current.categoryId)}</div>
             <div className={styles.small}>{preset?.order === "seq" ? "ID順番" : "ランダム"}</div>
           </div>
 
           <div className={styles.questionLabel}>問題</div>
+          <div className={styles.metaRow}>
+  <div className={`${styles.levelPill} ${styles[`pill_${tone}`]}`}>
+    定着度：{LEVEL_LABEL[lvNow]}
+  </div>
+</div>
+
           <h2 className={styles.term}>{current.term}</h2>
 
           <div className={styles.choiceGrid}>

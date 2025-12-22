@@ -7,10 +7,11 @@ import Image from "next/image";
 export default function HomePage() {
   return (
     <>
-      <Header title="関西弁ITパスポート単語アプリ" />
+      <Header title="ITパスポート単語アプリ" />
 
       <main className={styles.main}>
-        <DogMascot message="単語帳モードで学習して、テストモードで腕試ししよう" />
+        <DogMascot message="単語帳モードで学習して、テストモードで腕試ししよう。
+        解説は最後の関西弁だけ読んどけばいいよ！" />
 
         <div className={styles.buttons}>
           <Link href="/select" className={styles.primary}>
